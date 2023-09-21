@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Main template file
  * 
@@ -8,7 +7,6 @@
 
 get_header();
 ?>
-
 
 <div id="primary">
     <div id="main" class="site-main mt-5" role="main">
@@ -19,53 +17,44 @@ get_header();
                 <?php
                 if (is_home() && !is_front_page()) {
                 ?>
-                    <p>
-                    <h1 class="page-title">
-                        <?php single_post_title(); ?> </h1>
-                    </p>
+                    <header>
+                        <h1 class="page-title">
+                            <?php single_post_title(); ?> </h1>
+                    </header>
                 <?php
                 }
                 ?>
 
                 <div class="row">
-                <?php
-                $index = 0;
-                $no_of_columns = 3;
-
-                while (have_posts()) : the_post();
-                   if ($index % $no_of_columns == 0) {
-                       ?> <div class="col-lg-4 col-md-6 col-sm-12">
-
-                     <?php
-                   }
-
-                  get_template_part('template-parts/content');
-
-                   $index++;
-
-                   if (0 !== $index && 0 === ($index % $no_of_columns)) {
-                       
-                     ?>
-                     </div>
                     <?php
-                   }
+                    $index = 0;
+                    $no_of_columns = 3;
 
-                   
+                    while (have_posts()) : the_post();
+                        if ($index % $no_of_columns == 0) {
+                    ?> <div class="col-lg-4 col-md-6 col-sm-12">
+                            <?php
+                        }
 
-                endwhile;
+                        get_template_part('template-parts/content');
 
-                ?>
+                        $index++;
+
+                        if (0 !== $index && 0 === ($index % $no_of_columns)) {
+                            ?>
+                            </div>
+                    <?php
+                        }
+                    endwhile;
+                    ?>
                 </div>
             </div>
-
         <?php
         else :
-                get_template_part('template-parts/content-none');
+            get_template_part('template-parts/content-none');
         endif;
         ?>
     </div>
 </div>
-
-
 
 <?php get_footer();
