@@ -19,7 +19,8 @@ class AQUILA_THEME
         // load class
         Assets::get_instance();
         Menus::get_instance();
-
+        Meta_Boxes::get_instance();
+        Sidebars::get_instance();
         $this->setup_hooks();
     }
 
@@ -59,8 +60,8 @@ class AQUILA_THEME
             'admin-preview-callback' => ''
         ];
         add_theme_support( 'custom-background', $defaults );
-
-        add_theme_support( 'post-thumbnails' );
+        add_theme_support('post-thumbnails');
+        add_image_size( 'featured-thumbnail', 300, 200, true );
         add_theme_support( 'customize-selective-refresh-widgets' ); 
         add_theme_support( 'automatic-feed-links' ); 
         add_theme_support( 'html5', 
@@ -85,6 +86,8 @@ class AQUILA_THEME
         if ( ! isset( $content_width ) ) {
             $content_width = 1240;
         }
+
+        
     }
 
    

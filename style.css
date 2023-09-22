@@ -20,3 +20,23 @@ Domain Path: /languages
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
+
+img{
+    width: 100%;
+    height: auto;
+}
+
+.updated:not(.published){
+    display: none;
+}   /* Hide the "Post updated." message on the post edit screen and  :not(.published) is used to hide the "Post published." message on the post edit screen. */
+
+
+
+.nav-item:hover .dropdown-menu:not(.show){
+    display: block;
+}  /* Show the dropdown menu on hover. */
+
+.page-numbers.current> span {
+    background-color: gray;
+    color: white;
+}

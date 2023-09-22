@@ -17,6 +17,7 @@
 
 
  include_once AQUILA_DIR_PATH . '/inc/helpers/autoloader.php';
+ include_once AQUILA_DIR_PATH . '/inc/helpers/template-tags.php';
 
   // aquila_get_theme_instance() function for get_instance() method from class-aquila-theme.php
   function aquila_get_theme_instance(){
