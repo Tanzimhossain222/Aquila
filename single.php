@@ -10,7 +10,7 @@ get_header();
 
 <div id="primary">
     <div id="main" class="site-main mt-5" role="main">
-        <?php
+    <?php
         if (have_posts()) :
         ?>
             <div class="container">
@@ -31,14 +31,24 @@ get_header();
             </div>
     </div>
 
-<?php
+    <?php
         else :
             get_template_part('template-parts/content-none');
         endif;
+
+       ?>  
+       <div class="container">
+        <?php
+            previous_post_link();
+            echo "&nbsp;&nbsp;&nbsp;";
+            next_post_link(); ?>
+       </div>
+       <?php
 ?>
 </div>
-</div>
+
+<?php
 
 
 
-<?php get_footer(); ?>
+get_footer(); ?>

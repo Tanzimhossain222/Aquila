@@ -35,3 +35,8 @@ img{
 .nav-item:hover .dropdown-menu:not(.show){
     display: block;
 }  /* Show the dropdown menu on hover. */
+
+.page-numbers.current> span {
+    background-color: gray;
+    color: white;
+}

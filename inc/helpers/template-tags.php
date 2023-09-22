@@ -94,3 +94,27 @@ function aquila_excerpt_more($more = ''){
 
     return $more;
 } 
+
+
+function aquila_pagination(){
+
+$args = [
+    'before_page_number' => '<span class="btn border border-secondary mr-2 mb-2">',
+    'after_page_number' => '</span>'
+];
+
+$allowed_tags = [
+    'span' => [
+        'class' => []
+    ],
+    'a' => [
+        'class' => [],
+        'href' => [],
+    ]
+];
+
+
+    printf(
+        '<nav class="aqula-pagination mt-5">%s</nav>',
+        wp_kses( paginate_links($args), $allowed_tags));
+}

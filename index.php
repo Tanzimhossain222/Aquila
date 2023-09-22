@@ -9,7 +9,7 @@ get_header();
 ?>
 
 <div id="primary">
-    <div id="main" class="site-main mt-5" role="main">
+    <main id="main" class="site-main mt-5" role="main">
         <?php
         if (have_posts()) :
         ?>
@@ -53,8 +53,10 @@ get_header();
         else :
             get_template_part('template-parts/content-none');
         endif;
+        
+        aquila_pagination();
         ?>
-    </div>
+    </main>
 </div>
 
 <?php get_footer();
