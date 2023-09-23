@@ -13,6 +13,30 @@
  if (!defined('AQUILA_DIR_URI')){
     define('AQUILA_DIR_URI', untrailingslashit(get_template_directory_uri())); 
  }  
+ // Build FIle Path
+    if (!defined('AQUILA_BUILD_URI')){
+        define('AQUILA_BUILD_URI', untrailingslashit(get_template_directory_uri()) . '/assets/dist'); 
+    }
+
+    if (!defined('AQUILA_BUILD_JS_URI')){
+        define('AQUILA_BUILD_JS_URI', untrailingslashit(get_template_directory_uri()) . '/assets/dist/js'); 
+    }
+    if (!defined('AQUILA_BUILD_JS_DIR_PATH')){
+        define('AQUILA_BUILD_JS_DIR_PATH', untrailingslashit(get_template_directory()) . '/assets/dist/js'); 
+    }
+
+
+    if (!defined('AQUILA_BUILD_IMG_URI')){
+        define('AQUILA_BUILD_IMG_DIR_PATH', untrailingslashit(get_template_directory()) . '/assets/dist/src/img'); 
+    }
+
+
+    if (!defined('AQUILA_BUILD_CSS_URI')){
+        define('AQUILA_BUILD_CSS_URI', untrailingslashit(get_template_directory_uri()) . '/assets/dist/css'); 
+    }
+    if (!defined('AQUILA_BUILD_CSS_DIR_PATH')){
+        define('AQUILA_BUILD_CSS_DIR_PATH', untrailingslashit(get_template_directory()) . '/assets/dist/css'); 
+    }
 
 
 
@@ -33,6 +57,3 @@
  }
 
  add_action('wp_enqueue_scripts', 'aquila_enqueue_scripts');
-
- ?>
- 
