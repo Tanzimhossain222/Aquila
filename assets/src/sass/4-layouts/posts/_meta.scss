@@ -1,0 +1,5 @@
+/* Entry meta */
+.updated:not(.published) {
+	display: none;
+}
+/* Hide the "Post updated." message on the post edit screen and  :not(.published) is used to hide the "Post published." message on the post edit screen. */

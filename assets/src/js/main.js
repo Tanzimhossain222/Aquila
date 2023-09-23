@@ -1,4 +1,8 @@
 import './clock';
+
+//styles
+import '../sass/main.scss';
+
+
 import '../img/cat.jpg';
 
-console.log('Hello from main.js file!'); 

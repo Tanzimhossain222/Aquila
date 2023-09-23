@@ -4,6 +4,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
 const UglyfyJsPlugin = require('uglifyjs-webpack-plugin');
+// const CopyPlugin = require('copy-webpack-plugin');
 
 
 // const JS_DIR = path.resolve(__dirname, 'src/js');
@@ -31,10 +32,12 @@ const rules = [
         }
     },
     {
-        test: /\.scss$/,
+        test: /\.scss$/i,
+        exclude: /node_modules/,
         use: [
             MiniCssExtractPlugin.loader,
-            'css-loader',
+			'css-loader',
+			'sass-loader',
         ]
     },
     {
@@ -52,11 +55,10 @@ const rules = [
 
 ]
 
-const  plugins = ()=> ([
-    new CleanWebpackPlugin({
-        CleanWebpackPlugin: ('production' === process.env.NODE_ENV) ? true : false,
-        // Automatically remove all unused webpack assets on rebuild, when set to true in production. ( https://www.npmjs.com/package/clean-webpack-plugin#options-and-defaults-optional )
-    }),
+const  plugins = (argv )=> ([
+    new CleanWebpackPlugin( {
+		cleanStaleWebpackAssets: ( 'production' === argv.mode  ) // Automatically remove all unused webpack assets on rebuild, when set to true in production. ( https://www.npmjs.com/package/clean-webpack-plugin#options-and-defaults-optional )
+	} ),
 
     new MiniCssExtractPlugin({
         filename: 'css/[name].css'
@@ -66,6 +68,17 @@ const  plugins = ()=> ([
 const externals = {
     jquery: 'jQuery'
 };
+
+/**
+ * Since you may have to disambiguate in your webpack.config.js between development and production builds,
+ * you can export a function from your webpack configuration instead of exporting an object
+ *
+ * @param {string} env environment ( See the environment options CLI documentation for syntax examples. https://webpack.js.org/api/cli/#environment-options )
+ * @param argv options map ( This describes the options passed to webpack, with keys such as output-filename and optimize-minimize )
+ * @return {{output: *, devtool: string, entry: *, optimization: {minimizer: [*, *]}, plugins: *, module: {rules: *}, externals: {jquery: string}}}
+ *
+ * @see https://webpack.js.org/configuration/configuration-types/#exporting-a-function
+ */
 
 module.exports = (env, argv)=>({
     entry: entry,
@@ -89,3 +102,6 @@ module.exports = (env, argv)=>({
     plugins: plugins(argv),
     externals: externals
 })
+
+
+
