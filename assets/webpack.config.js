@@ -4,7 +4,8 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
 const UglyfyJsPlugin = require('uglifyjs-webpack-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
 
 
 // const JS_DIR = path.resolve(__dirname, 'src/js');
@@ -16,6 +17,7 @@ const entry  = {
     main: JS_DIR + '/main.js',
     single: JS_DIR + '/single.js',
     editor: JS_DIR + '/editor.js',
+    blocks: JS_DIR + '/blocks.js',
 };
 
 const output = {
@@ -52,6 +54,18 @@ const rules = [
                 }
             }
         ]
+    },
+    {
+        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        use: [
+            {
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]',
+                    publicPath: 'production' === process.env.NODE_ENV ? '../' : '../../',
+                }
+            }
+        ]
     }
 
 ]
@@ -63,6 +77,10 @@ const  plugins = (argv )=> ([
 
     new MiniCssExtractPlugin({
         filename: 'css/[name].css'
+    }),
+    new DependencyExtractionWebpackPlugin({
+        injectPolyfill: true,
+        combineAssets: true,
     }),
 ])
 

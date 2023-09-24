@@ -18,6 +18,10 @@
         define('AQUILA_BUILD_URI', untrailingslashit(get_template_directory_uri()) . '/assets/dist'); 
     }
 
+    if (!defined('AQUILA_BUILD_PATH')){
+        define('AQUILA_BUILD_PATH', untrailingslashit(get_template_directory()) . '/assets/dist'); 
+    }
+
     if (!defined('AQUILA_BUILD_JS_URI')){
         define('AQUILA_BUILD_JS_URI', untrailingslashit(get_template_directory_uri()) . '/assets/dist/js'); 
     }
