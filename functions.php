@@ -27,7 +27,7 @@
 
 
     if (!defined('AQUILA_BUILD_IMG_URI')){
-        define('AQUILA_BUILD_IMG_DIR_PATH', untrailingslashit(get_template_directory()) . '/assets/dist/src/img'); 
+        define('AQUILA_BUILD_IMG_URI', untrailingslashit(get_template_directory_uri()) . '/assets/dist/src/img'); 
     }
 
 
@@ -49,12 +49,3 @@
     }  
 
     aquila_get_theme_instance();            // call the function
-
-// Remove Gutenberg Block Library CSS from loading on the frontend
- function aquila_remove_block_library_css(){
-     wp_dequeue_style('wp-block-library');
-     wp_dequeue_style('wp-block-library-theme');
-     wp_dequeue_style('wc-block-style'); // Remove WooCommerce block CSS
- }
-
- add_action('wp_enqueue_scripts', 'aquila_remove_block_library_css', 100);
