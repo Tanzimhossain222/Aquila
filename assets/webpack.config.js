@@ -14,7 +14,8 @@ const BUILD_DIR = path.resolve(__dirname, 'dist');
 
 const entry  = {
     main: JS_DIR + '/main.js',
-    single: JS_DIR + '/single.js'
+    single: JS_DIR + '/single.js',
+    editor: JS_DIR + '/editor.js',
 };
 
 const output = {
