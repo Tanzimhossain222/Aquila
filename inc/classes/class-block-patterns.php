@@ -20,6 +20,8 @@ class Block_Patterns {
     protected function setup_hooks()
     {
         add_action('init', [$this, 'register_block_patterns']);
+        add_action('init', [$this, 'register_block_patterns_categories']);
+
     }
 
     /**
@@ -39,8 +41,8 @@ class Block_Patterns {
                     'description' => __('Aquila Cover block pattern', 'aquila'),
                     'categories' => ['cover'],
                     'content'=> '<!-- wp:cover {"url":"http://localhost/wordpress/wp-content/uploads/2008/06/windmill.jpg","id":767,"dimRatio":50,"layout":{"type":"constrained"}} -->
-                    <div class="wp-block-cover"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-767" alt="Windmill" src="http://localhost/wordpress/wp-content/uploads/2008/06/windmill.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center"} -->
-                    <h2 class="wp-block-heading has-text-align-center">Never let your memories be greater than<br>your dreams</h2>
+                    <div class="wp-block-cover"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-767" alt="Windmill" src="http://localhost/wordpress/wp-content/uploads/2008/06/windmill.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","className":"aquila-cover"} -->
+                    <h2 class="wp-block-heading has-text-align-center aquila-cover">Never let your memories be greater than<br>your dreams</h2>
                     <!-- /wp:heading -->
                     
                     <!-- wp:paragraph {"align":"center"} -->
@@ -59,4 +61,24 @@ class Block_Patterns {
         
     }
 
+
+    /**
+     * block patterns categories register function
+     * 
+     * @return void
+     * @link https://developer.wordpress.org/reference/functions/register_block_pattern_category/
+     */
+
+    function register_block_patterns_categories(){
+        $pattern_categories = [
+            'cover' => __('Cover', 'aquila'),
+            'carousel' => __('Carousel', 'aquila'),
+        ];
+        if(function_exists('register_block_pattern_category') && !empty($pattern_categories)){
+            foreach($pattern_categories as $pattern_category => $pattern_category_label){
+                register_block_pattern_category($pattern_category, ['label' => $pattern_category_label]);
+            }
+        }
+    }
 }
+
