@@ -21,6 +21,10 @@ class AQUILA_THEME
         Menus::get_instance();
         Meta_Boxes::get_instance();
         Sidebars::get_instance();
+        Block_Patterns::get_instance();
+
+
+
         $this->setup_hooks();
     }
 
@@ -106,6 +110,9 @@ class AQUILA_THEME
 		 * @link https://developer.wordpress.org/reference/functions/add_editor_style/
 		 */
         add_editor_style('assets/dist/css/editor.css');
+
+        //Remove the core block patterns
+        remove_theme_support( 'core-block-patterns' );
 
 
 
