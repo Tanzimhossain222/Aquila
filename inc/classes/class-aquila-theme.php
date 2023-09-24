@@ -76,11 +76,38 @@ class AQUILA_THEME
             ] 
         ); 
 
-        add_editor_style();
-
         add_theme_support( 'wp-block-styles' );
 
         add_theme_support( 'align-wide' ); 
+
+
+        /**
+		 * Loads the editor styles in the Gutenberg editor.
+		 *
+		 * Editor Styles allow you to provide the CSS used by WordPress’ Visual Editor so that it can match the frontend styling.
+		 * If we don't add this, the editor styles will only load in the classic editor ( tiny mice )
+		 *
+		 * @see https://developer.wordpress.org/block-editor/developers/themes/theme-support/#editor-styles
+		 */
+        add_theme_support( 'editor-styles');
+
+
+        /**
+		 *
+		 * Path to our custom editor style.
+		 * It allows you to link a custom stylesheet file to the TinyMCE editor within the post edit screen.
+		 *
+		 * Since we are not passing any parameter to the function,
+		 * it will by default, link the editor-style.css file located directly under the current theme directory.
+		 * In our case since we are passing 'assets/dist/css/editor.css' path it will use that.
+		 * You can change the name of the file or path and replace the path here.
+		 *
+		 * @see add_editor_style(
+		 * @link https://developer.wordpress.org/reference/functions/add_editor_style/
+		 */
+        add_editor_style('assets/dist/css/editor.css');
+
+
 
         global $content_width;
         if ( ! isset( $content_width ) ) {

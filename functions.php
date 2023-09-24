@@ -50,10 +50,11 @@
 
     aquila_get_theme_instance();            // call the function
 
-// setup theme Script
- function aquila_enqueue_scripts(){
-
-  
+// Remove Gutenberg Block Library CSS from loading on the frontend
+ function aquila_remove_block_library_css(){
+     wp_dequeue_style('wp-block-library');
+     wp_dequeue_style('wp-block-library-theme');
+     wp_dequeue_style('wc-block-style'); // Remove WooCommerce block CSS
  }
 
- add_action('wp_enqueue_scripts', 'aquila_enqueue_scripts');
+ add_action('wp_enqueue_scripts', 'aquila_remove_block_library_css', 100);
