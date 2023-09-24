@@ -6,12 +6,13 @@ const cssnano = require('cssnano');
 const UglyfyJsPlugin = require('uglifyjs-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
-
+const TerserPlugin = require('terser-webpack-plugin');
 
 // const JS_DIR = path.resolve(__dirname, 'src/js');
 const JS_DIR = path.resolve(__dirname, 'src/js');
 const IMG_DIR = path.resolve(__dirname, 'src/img');
 const BUILD_DIR = path.resolve(__dirname, 'dist');
+const LIB_DIR = path.resolve( __dirname, 'src/lib' );
 
 const entry  = {
     main: JS_DIR + '/main.js',
@@ -82,6 +83,13 @@ const  plugins = (argv )=> ([
         injectPolyfill: true,
         combineAssets: true,
     }),
+    new CopyPlugin( {
+		patterns: [
+			{ from: LIB_DIR, to: BUILD_DIR + '/lib' }
+		]
+	} ),
+
+    
 ])
 
 const externals = {
@@ -109,17 +117,22 @@ module.exports = (env, argv)=>({
     optimization:{
         minimizer: [
             new OptimizeCssAssetsWebpackPlugin({
-                cssProcessor: cssnano,
+                cssProcessor: require('cssnano'),
+                cssProcessorOptions: {
+                    preset: ['default', { discardComments: { removeAll: true } }],
+                },
             }),
+            
             new UglyfyJsPlugin({
                 cache: false,
                 parallel: true,
-                sourceMap: false
+                sourceMap: false,
             })
         ]
     },
     plugins: plugins(argv),
-    externals: externals
+    externals: externals,
+    stats: 'verbose',
 })
 
 
