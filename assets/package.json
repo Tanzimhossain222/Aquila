@@ -6,7 +6,8 @@
   "scripts": {
     "prod": "cross-env NODE_ENV=production webpack --mode production --progress",
     "dev": "cross-env NODE_ENV=development webpack --watch --mode development --progress",
-    "clean": "rm -rf build/*"
+    "clean": "rm -rf build/*",
+    "svg": "svgr -d src/js/icons src/icons"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "@babel/core": "^7.22.20",
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-react": "^7.22.15",
+    "@svgr/cli": "^8.1.0",
     "@wordpress/base-styles": "^4.33.0",
     "@wordpress/block-editor": "^12.10.0",
     "@wordpress/blocks": "^12.19.0",
@@ -47,8 +49,8 @@
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
-    "cssnano": "4.1.11",
     "css-loader": "^6.8.1",
+    "cssnano": "4.1.11",
     "file-loader": "^6.2.0",
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.7.6",

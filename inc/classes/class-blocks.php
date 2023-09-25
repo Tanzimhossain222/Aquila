@@ -1,47 +1,48 @@
-<?php 
-
+<?php
 /**
- *  Blocks Class
- * 
+ * Blocks
+ *
  * @package Aquila
  */
 
 namespace AQUILA_THEME\Inc;
+
 use AQUILA_THEME\Inc\Traits\Singleton;
 
 class Blocks {
-    use Singleton;
+	use Singleton;
 
-    protected function __construct()
-    {
-        $this->setup_hooks();
-    }
+	protected function __construct() {
 
-    protected function setup_hooks()
-    {
-       add_action('block_categories', [$this, 'add_block_categories']);
-    }
+		$this->setup_hooks();
+	}
 
-    /**
-     * Add custom block categories
-     *
-     * @param [type] $categories
-     * @return void
-     * @link https://developer.wordpress.org/block-editor/developers/filters/block-filters/#managing-block-categories
-     */
-     public function add_block_categories($categories){
-        $category_slugs = wp_list_pluck($categories, 'slug');
+	protected function setup_hooks() {
+		add_filter( 'block_categories_all', [ $this, 'add_block_categories' ] );
+	}
 
-        return in_array('aquila', $category_slugs, true) ? $categories : array_merge(
-            $categories,
-            [
-                [
-                    'slug' => 'aquila',
-                    'title' => __('Aquila Blocks', 'aquila'),
-                    'icon' => 'table-row-after'
-                ]
-            ]
-        );
+	/**
+	 * Add a block category
+	 *
+	 * @param array $categories Block categories.
+	 *
+	 * @return array
+	 */
+	public function add_block_categories( $categories ) {
 
-     }
+		$category_slugs = wp_list_pluck( $categories, 'slug' );
+
+		return in_array( 'aquila', $category_slugs, true ) ? $categories : array_merge(
+			$categories,
+			[
+				[
+					'slug'  => 'aquila',
+					'title' => __( 'Aquila Blocks', 'aquila' ),
+					'icon'  => 'table-row-after',
+				],
+			]
+		);
+
+	}
+
 }
