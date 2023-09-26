@@ -54,3 +54,9 @@ function aquila_get_theme_instance() {
 }
 
 aquila_get_theme_instance();
+
+
+function enqueue_my_scripts() {
+    wp_enqueue_script('wp-blocks');
+}
+add_action('wp_enqueue_scripts', 'enqueue_my_scripts');

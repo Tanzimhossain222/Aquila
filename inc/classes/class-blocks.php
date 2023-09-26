@@ -19,6 +19,7 @@ class Blocks {
 
 	protected function setup_hooks() {
 		add_filter( 'block_categories_all', [ $this, 'add_block_categories' ] );
+		add_action('init', [$this, 'register_block_pattern_assets'] );
 	}
 
 	/**
@@ -44,5 +45,21 @@ class Blocks {
 		);
 
 	}
+
+	/**
+	 * Register block pattern assets
+	 */
+
+	public function register_block_pattern_assets() {
+		register_block_type (
+			'aquila/hero',
+			[
+				'editor_script' => 'aquila-blocks-js',
+				'editor_style' => 'aquila-blocks-css',
+				'style' => 'aquila-blocks-css',
+			]
+		);
+	}
+
 
 }
