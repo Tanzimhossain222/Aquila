@@ -41,6 +41,7 @@ const layoutStyleButton = [
 	},
 ];
 
+
 /**
  * Deregister styles.
  *
@@ -70,6 +71,6 @@ const register = () => {
  * Register and unregister styles on dom ready.
  */
 wp.domReady( () => {
-	deRegister();
+	 deRegister();
 	register();
 });
