@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This is a wordpress Themes",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "start": "cross-env NODE_ENV=development  wp-scripts start --watch --mode development --progress ",
     "prod": "cross-env NODE_ENV=production webpack --mode production --progress",
@@ -14,8 +15,8 @@
     "lint": "eslint src/js/*",
     "lint:fix": "eslint --fix src/js/* ",
     "lint-css": "stylelint ' ./src/sass/**/*.scss ' ",
-		"lint-css:fix": "npm run lint-css -- --fix",
-		"precommit": "npm run lint-css:fix && npm run lint:fix && npm run prod"
+    "lint-css:fix": "npm run lint-css -- --fix",
+    "precommit": "npm run lint-css:fix && npm run lint:fix && npm run prod"
   },
   "repository": {
     "type": "git",
@@ -81,6 +82,7 @@
   },
   "dependencies": {
     "sass": "^1.68.0",
+    "slick-carousel": "^1.8.1",
     "terser-webpack-plugin": "^5.3.9"
   }
 }
