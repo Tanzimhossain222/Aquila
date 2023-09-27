@@ -30,6 +30,8 @@ class Assets {
 		 * except when is_admin() is used to include them conditionally
 		 */
 		add_action( 'enqueue_block_assets', [ $this, 'enqueue_editor_assets' ] );
+
+		add_action('init', [$this, 'register_block_pattern_assets'] );
 	}
 
 	public function register_styles() {
@@ -50,6 +52,7 @@ class Assets {
 		// Enqueue Scripts.
 		wp_enqueue_script( 'main-js' );
 		wp_enqueue_script( 'bootstrap-js' );
+		
 	}
 
 	/**
@@ -99,5 +102,20 @@ class Assets {
 		);
 
 	}
+
+
+
+	
+	public function register_block_pattern_assets() {
+		register_block_type (
+			'aquila/hero',
+			[
+				'editor_script' => 'aquila-blocks-js',
+				'editor_style' => 'aquila-blocks-css',
+				'style' => 'aquila-blocks-css',
+			]
+		);
+	}
+
 
 }

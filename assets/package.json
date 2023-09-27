@@ -10,7 +10,9 @@
     "clean": "rm -rf build/*",
     "svg": "svgr -d src/js/icons src/icons",
     "test:e2e": "wp-scripts test-e2e",
-    "test:unit": "wp-scripts test-unit-js"
+    "test:unit": "wp-scripts test-unit-js",
+    "lint": "eslint src/js/*",
+    "lint:fix": "eslint --fix src/js/* "
   },
   "repository": {
     "type": "git",
@@ -74,8 +76,5 @@
   "dependencies": {
     "sass": "^1.68.0",
     "terser-webpack-plugin": "^5.3.9"
-  },
-  "jest": {
-    "testEnvironment": "jsdom"
   }
 }

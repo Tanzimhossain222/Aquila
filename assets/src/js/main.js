@@ -4,8 +4,3 @@ import './clock/index.js';
 import '../sass/main.scss';
 
 import '../img/patterns/cover.jpg';
-
-
-
-
-
