@@ -12,7 +12,10 @@
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js",
     "lint": "eslint src/js/*",
-    "lint:fix": "eslint --fix src/js/* "
+    "lint:fix": "eslint --fix src/js/* ",
+    "lint-css": "stylelint ' ./src/sass/**/*.scss ' ",
+		"lint-css:fix": "npm run lint-css -- --fix",
+		"precommit": "npm run lint-css:fix && npm run lint:fix && npm run prod"
   },
   "repository": {
     "type": "git",
@@ -69,6 +72,9 @@
     "sass-loader": "^13.3.2",
     "sass-mq": "5.0.1",
     "style-loader": "^3.3.3",
+    "stylelint": "^15.10.3",
+    "stylelint-config-wordpress": "^17.0.0",
+    "stylelint-webpack-plugin": "^4.1.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
