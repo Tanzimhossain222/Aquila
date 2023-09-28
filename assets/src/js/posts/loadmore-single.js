@@ -1,0 +1,1 @@
+console.log('loadmore-single.js');

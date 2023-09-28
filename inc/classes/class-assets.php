@@ -52,6 +52,7 @@ class Assets {
 		// Register scripts.
 		wp_register_script( 'slick-js', AQUILA_BUILD_LIB_URI . '/js/slick.min.js', ['jquery'], false, true );
 		wp_register_script( 'main-js', AQUILA_BUILD_JS_URI . '/main.js', ['jquery', 'slick-js' ], filemtime( AQUILA_BUILD_JS_DIR_PATH . '/main.js' ), true );
+		wp_register_script( 'single-js', AQUILA_BUILD_JS_URI . '/single.js', ['jquery', 'slick-js' ], filemtime( AQUILA_BUILD_JS_DIR_PATH . '/single.js' ), true );
 		wp_register_script( 'bootstrap-js', AQUILA_BUILD_LIB_URI . '/js/bootstrap.min.js', ['jquery'], false, true );
 
 		// Enqueue Scripts.
@@ -59,6 +60,11 @@ class Assets {
 		wp_enqueue_script('slick-js');
 		wp_enqueue_script('bootstrap-js');
 		wp_enqueue_script('main-js'); // Enqueue 'main-js' last
+
+		// if single post page
+		if ( is_single() ) {
+			wp_enqueue_script('single-js');
+		}
 
 		// Localize main-js script. for ajax
 		wp_localize_script( 'main-js', 'siteConfig', [
