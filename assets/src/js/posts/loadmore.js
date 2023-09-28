@@ -11,7 +11,7 @@
 			this.ajaxNonce = siteConfig?.ajax_nonce ?? '';
 			this.loadMoreBtn = $( '#load-more' );
 			this.loadingTextEl = $( '#loading-text' );
-			this.isRequestProcessing = false;
+			this.isRequestProcessing = false; // Flag to check if ajax request is in progress.
 
 			
 			
@@ -21,16 +21,15 @@
 				threshold: 1.0, // 1.0 means set isIntersecting to true when element comes in 100% view.
 			};
 
-
 			this.init();
 		}
 
 		init() {
 			if ( ! this.loadMoreBtn.length ) {
 				return;
-			}
+			} 
 			
-			this.totalPagesCount = $( '#post-pagination' ).data( 'max-pages' );
+			this.totalPagesCount = $( '#post-pagination' ).data( 'max-pages' ); // Get total no of pages from pagination element .
 
 
 			/**
@@ -65,7 +64,7 @@
 				}
 			} );
 		}
-		
+
 
 		/**
 		 * Load more posts.
@@ -79,7 +78,8 @@
 		 * @return null
 		 */
 		handleLoadMorePosts() {
-			// Get page no from data attribute of load-more button.
+			// Get page no from data attribute of load-more button. 
+			//isRequestProcessing is a flag to check if ajax request is in progress.
 			const page = this.loadMoreBtn.data( 'page' );
 			if ( ! page || this.isRequestProcessing ) {
 				return null;

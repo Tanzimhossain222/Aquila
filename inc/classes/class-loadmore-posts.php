@@ -24,6 +24,14 @@ class Loadmore_Posts {
 		add_action( 'wp_ajax_nopriv_load_more', [ $this, 'ajax_script_post_load_more' ] );
 		add_action( 'wp_ajax_load_more', [ $this, 'ajax_script_post_load_more' ] );
 
+		/**
+		 * Create a shortcode to display posts
+		 * 
+		 * Useage echo do_shortcode('[post_listing_more]');
+		 */
+
+		add_shortcode( 'post_listing_more', [ $this, 'post_script_load_more' ] );
+
 	}
 
 	/**
@@ -65,6 +73,15 @@ class Loadmore_Posts {
 			while ( $query->have_posts() ): $query->the_post();
 				get_template_part( 'template-parts/components/post-card' );
 			endwhile;
+
+			// Pagination for Google.
+			if ( ! $is_ajax_request ) :
+				$total_pages = $query->max_num_pages;
+				get_template_part( 'template-parts/common/pagination', null, [
+					'total_pages'  => $total_pages,
+					'current_page' => $page_no,
+				] );
+			endif;
 
 		else:
 			// Return response as zero, when no post found.
