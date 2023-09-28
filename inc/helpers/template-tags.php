@@ -31,6 +31,11 @@ function the_post_custom_thumbnail($post_id, $size = 'featured-thumbnail', $addi
 
 
 function aquila_posted_on(){
+    $year                        = get_the_date( 'Y' );
+	$month                       = get_the_date( 'n' );
+	$day                         = get_the_date( 'j' );
+	$post_date_archive_permalink = get_day_link( $year, $month, $day );
+
     $time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 
     // Post is modified ( when post published time and modified time are different )
@@ -52,7 +57,7 @@ function aquila_posted_on(){
     
     $posted_on = sprintf(
         esc_html_x('Posted on %s', 'post date', 'aqula'),
-        '<a href="'. esc_url(get_permalink()) .'" rel="bookmark">'. $time_string .'</a>'
+        '<a href="'. esc_url( $post_date_archive_permalink ) .'" rel="bookmark">'. $time_string .'</a>'
     );
 
     echo '<span class="posted-on text-secondary">'. $posted_on .'</span>';
