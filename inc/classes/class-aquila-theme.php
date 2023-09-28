@@ -5,9 +5,9 @@
  * @package Aquila
  */
 
-namespace AQUILA_THEME\Inc;
+namespace AQUILA_THEME\Inc; 
 
-use AQUILA_THEME\Inc\Traits\Singleton;
+use AQUILA_THEME\Inc\Traits\Singleton; 
 
 class AQUILA_THEME {
 	use Singleton;
@@ -23,6 +23,9 @@ class AQUILA_THEME {
         Block_Patterns::get_instance();
 		Loadmore_Posts::get_instance();
 		Loadmore_Single::get_instance();
+		Register_Post_Types::get_instance();
+		Register_Taxonomies::get_instance();
+		Archive_Settings::get_instance();
 
 		$this->setup_hooks();
 	}
