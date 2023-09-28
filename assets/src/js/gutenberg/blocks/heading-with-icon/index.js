@@ -30,7 +30,7 @@ registerBlockType( 'aquila-blocks/heading', {
 	description: __( 'Add Heading and select Icons', 'aquila' ),
 
 	category: 'aquila',
-
+	
 	attributes: {
 		option: {
 			type: 'string',

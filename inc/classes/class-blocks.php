@@ -45,4 +45,7 @@ class Blocks {
 
 	}
 
+	/**
+	 * Register block pattern assets
+	 */
 }

@@ -70,6 +70,13 @@ function aquila_posted_by(){
 
 // function for excerpt
 function aquila_the_excerpt($trim_character_count = 0){
+    $post_ID = get_the_ID();
+
+    if(empty($post_ID)){
+        return null;
+    }
+
+
     if(!has_excerpt() || 0 === $trim_character_count){
         the_excerpt();
         return;
