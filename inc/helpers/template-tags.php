@@ -131,6 +131,56 @@ $allowed_tags = [
         wp_kses( paginate_links($args), $allowed_tags));
 }
 
+function aquila_the_post_pagination( $current_page_no, $posts_per_page, $article_query, $first_page_url, $last_page_url, bool $is_query_param_structure = true ) {
+	$prev_posts = ( $current_page_no - 1 ) * $posts_per_page;
+	$from       = 1 + $prev_posts;
+	$to         = count( $article_query->posts ) + $prev_posts;
+	$of         = $article_query->found_posts;
+	$total_pages = $article_query->max_num_pages;
+
+	$base = ! empty( $is_query_param_structure ) ? add_query_arg( 'page', '%#%' ) :  get_pagenum_link( 1 ) . '%_%';
+	$format = ! empty( $is_query_param_structure ) ? '?page=%#%' : 'page/%#%';
+
+	?>
+	<div class="mt-0 md:mt-10 mb-10 lg:my-5 flex items-center justify-end posts-navigation">
+		<?php
+		if ( 1 < $total_pages && !empty( $first_page_url ) ) {
+			printf(
+				'<span class="mr-2">Showing %1$s - %2$s Of %3$s</span>',
+				$from,
+				$to,
+				$of
+			);
+		}
+
+
+		// First Page
+		if ( 1 !== $current_page_no && ! empty( $first_page_url ) ) {
+			printf( '<a class="first-pagination-link btn border border-secondary mr-2" href="%1$s" title="first-pagination-link">%2$s</a>', esc_url( $first_page_url ), __( 'First', 'aquila' ) );
+		}
+
+		echo paginate_links( [
+			'base'      => $base,
+			'format'    => $format,
+			'current'   => $current_page_no,
+			'total'     => $total_pages,
+			'prev_text' => __( 'Prev', 'aquila' ),
+			'next_text' => __( 'Next', 'aquila' ),
+		] );
+
+		// Last Page
+		if ( $current_page_no < $total_pages && !empty( $last_page_url ) ) {
+
+			printf( '<a class="last-pagination-link btn border border-secondary ml-2" href="%1$s" title="last-pagination-link">%2$s</a>', esc_url( $last_page_url ), __( 'Last', 'aquila' ) );
+		}
+
+		?>
+	</div>
+	<?php
+}
+
+
+
 /**
  * Checks to see if the specified user id has a uploaded the image via wp_admin.
  *

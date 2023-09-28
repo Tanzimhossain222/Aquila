@@ -83,7 +83,9 @@ $last_page_url   = sprintf(
 						?>
 					</div>
 					<div>
-						<?php aquila_the_post_pagination( $current_page_no, AQUILA_ARCHIVE_POST_PER_PAGE, $wp_query, $first_page_url, $last_page_url, false ); ?>
+						 
+                    <?php aquila_the_post_pagination($current_page_no, AQUILA_ARCHIVE_POST_PER_PAGE, $wp_query, $first_page_url, $last_page_url, false); ?>
+
 					</div>
 				</div>
 			</div>
