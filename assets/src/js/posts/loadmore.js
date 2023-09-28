@@ -13,11 +13,14 @@
 			this.loadingTextEl = $( '#loading-text' );
 			this.isRequestProcessing = false;
 
+			
+			
 			this.options = {
 				root: null,
 				rootMargin: '0px',
 				threshold: 1.0, // 1.0 means set isIntersecting to true when element comes in 100% view.
 			};
+
 
 			this.init();
 		}
@@ -29,18 +32,20 @@
 			
 			this.totalPagesCount = $( '#post-pagination' ).data( 'max-pages' );
 
+
 			/**
-			 * Add the IntersectionObserver api, and listen to the load more intersection status.
-			 * so that intersectionObserverCallback gets called if the element intersection status changes.
-			 *
+			 * Add the IntersectionObserver api, and listen to the load more intersection status. 
+			 * so that intersectionObserverCallback gets called if the element intersection status changes. 
+			 * 
 			 * @type {IntersectionObserver}
-			 */
+			 */ 
 			const observer = new IntersectionObserver(
-				( entries ) => this.intersectionObserverCallback( entries ),
+				( entries ) => this.intersectionObserverCallback ( entries ),
 				this.options
 			);
 			observer.observe( this.loadMoreBtn[ 0 ] );
 		}
+
 
 		/**
 		 * Gets called on initial render with status 'isIntersecting' as false and then
@@ -49,7 +54,7 @@
 		 * @param {array} entries No of elements under observation.
 		 *
 		 */
-		intersectionObserverCallback( entries ) {
+		intersectionObserverCallback ( entries ) {
 			// array of observing elements
 
 			// The logic is apply for each entry ( in this case it's just one loadmore button )
@@ -60,6 +65,7 @@
 				}
 			} );
 		}
+		
 
 		/**
 		 * Load more posts.
