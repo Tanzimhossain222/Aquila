@@ -7,7 +7,7 @@
     "start": "cross-env NODE_ENV=development  wp-scripts start --watch --mode development --progress ",
     "prod": "cross-env NODE_ENV=production webpack --mode production --progress",
     "dev": "cross-env NODE_ENV=development webpack --watch --mode development --progress",
-    "clean": "rm -rf build/*",
+    "clean": "rm -rf dist/*",
     "svg": "svgr -d src/js/icons src/icons",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js",
@@ -82,6 +82,7 @@
   "dependencies": {
     "sass": "^1.68.0",
     "slick-carousel": "^1.8.1",
-    "terser-webpack-plugin": "^5.3.9"
+    "terser-webpack-plugin": "^5.3.9",
+    "zustand": "^4.4.1"
   }
 }

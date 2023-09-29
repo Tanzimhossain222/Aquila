@@ -40,12 +40,19 @@ class Assets {
 		wp_register_style( 'slick-css', AQUILA_BUILD_LIB_URI . '/css/slick.css', [], false, 'all' );
 		wp_register_style( 'slick-theme-css', AQUILA_BUILD_LIB_URI . '/css/slick-theme.css', ['slick-css'], false, 'all' );
 		wp_register_style( 'main-css', AQUILA_BUILD_CSS_URI . '/main.css', ['bootstrap-css'], filemtime( AQUILA_BUILD_CSS_DIR_PATH . '/main.css' ), 'all' );
+		wp_register_style( 'search-css', AQUILA_BUILD_CSS_URI . '/search.css', [], filemtime( AQUILA_BUILD_CSS_DIR_PATH . '/search.css' ), 'all' );
 
 		// Enqueue Styles.
 		wp_enqueue_style( 'bootstrap-css' );
 		wp_enqueue_style( 'slick-css' );
 		wp_enqueue_style( 'slick-theme-css' );
 		wp_enqueue_style( 'main-css' );
+
+		// if search page
+		if ( is_page( 'search' ) ) {
+			wp_enqueue_style( 'search-css' );
+		}
+
 	}
 
 	public function register_scripts() {
@@ -54,6 +61,7 @@ class Assets {
 		wp_register_script( 'main-js', AQUILA_BUILD_JS_URI . '/main.js', ['jquery', 'slick-js' ], filemtime( AQUILA_BUILD_JS_DIR_PATH . '/main.js' ), true );
 		wp_register_script( 'single-js', AQUILA_BUILD_JS_URI . '/single.js', ['jquery', 'slick-js' ], filemtime( AQUILA_BUILD_JS_DIR_PATH . '/single.js' ), true );
 		wp_register_script( 'author-js', AQUILA_BUILD_JS_URI . '/author.js', ['jquery', 'slick-js' ], filemtime( AQUILA_BUILD_JS_DIR_PATH . '/author.js' ), true );
+		wp_register_script( 'search-js', AQUILA_BUILD_JS_URI . '/search.js', ['main-js' ], filemtime( AQUILA_BUILD_JS_DIR_PATH . '/search.js' ), true );
 
 		wp_register_script( 'bootstrap-js', AQUILA_BUILD_LIB_URI . '/js/bootstrap.min.js', ['jquery'], false, true );
 
@@ -72,6 +80,18 @@ class Assets {
 		if ( is_author() ) {
 			wp_enqueue_script('author-js');
 		}
+
+		//if search page 
+		if ( is_page('search') ) {
+			$filters_data = get_filters_data();
+			wp_enqueue_script('search-js');
+			wp_localize_script( 'search-js', 'search_settings', [
+				'rest_api_url' => home_url( '/wp-json/af/v1/search' ),
+				'root_url'     => home_url( '/search/'),
+				'filter_ids' => get_filter_ids($filters_data),
+			] );
+		}
+
 
 		// Localize main-js script. for ajax
 		wp_localize_script( 'main-js', 'siteConfig', [
